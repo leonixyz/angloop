@@ -5,4 +5,6 @@ export class User {
   password: string;
   email: string;
   emailVerified: true;
+  token: string;
+  expiration: Date;
 }

@@ -1,3 +1,22 @@
-<p>
-  login works!
-</p>
+<form *ngIf="!user || !user.token">
+  <div class="mb-2">
+    <label for="username">Username</label>&nbsp;&nbsp;
+    <input type="text" [(ngModel)]="user.username" id="username" name="username" class="form-control" required
+      [ngClass]="{'is-invalid': !user.username }">
+  </div>
+  <div class="mb-2">
+    <label for="password">Password</label>
+    <input type="password" [(ngModel)]="user.password" id="password" name="password" class="form-control" required
+      [ngClass]="{'is-invalid': !user.password }">
+  </div>
+  <div class="mb-2">
+    <button class="btn btn-primary" [disabled]="!user.username || !user.password" (click)="login()">
+      <i class="fa fa-sign-in-alt"></i> Login
+    </button>
+    &nbsp;
+    <span *ngIf="error" class="badge badge-danger">{{error.error.message}}</span>
+  </div>
+</form>
+<div *ngIf="user && user.token">
+  Logged in as {{ user.username }}.
+</div>

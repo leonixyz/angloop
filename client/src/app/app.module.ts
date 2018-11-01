@@ -3,6 +3,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
+import { AuthenticationModule } from './authentication/authentication.module';
 
 @NgModule({
   declarations: [
@@ -11,6 +12,7 @@ import { NgModule } from '@angular/core';
   ],
   imports: [
     AppRoutingModule,
+    AuthenticationModule,
     BrowserModule
   ],
   providers: [],

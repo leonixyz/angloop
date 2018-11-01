@@ -1,3 +1,36 @@
-<p>
-  registration works!
-</p>
+<form *ngIf="!user.token">
+  <div class="mb-2">
+    <label for="username">Username</label>&nbsp;&nbsp;
+    <span *ngIf="error && error.details.messages.username" class="badge badge-danger">{{error.details.messages.username[0]}}</span>
+    <input type="text" [(ngModel)]="user.username" id="username" name="username" class="form-control" required
+      [ngClass]="{'is-invalid': !user.username }">
+  </div>
+  <div class="mb-2">
+    <label for="email">Email</label>&nbsp;&nbsp;
+    <span *ngIf="error && error.details.messages.email" class="badge badge-danger">{{error.details.messages.email[0]}}</span>
+    <input type="email" [(ngModel)]="user.email" id="email" name="email" class="form-control" required
+      [ngClass]="{'is-invalid': !isValidEmail(user.email)}">
+  </div>
+  <div class="mb-2">
+    <label for="email_confirm">Confirm email</label>
+    <input type="email" [(ngModel)]="emailConfirm" id="email_confirm" name="email_confirm" class="form-control" required
+      [ngClass]="{'is-invalid': user.email !== emailConfirm || !isValidEmail(emailConfirm) }">
+  </div>
+  <div class="mb-2">
+    <label for="password">Password</label>&nbsp;&nbsp;
+    <span *ngIf="error && error.details.messages.password" class="badge badge-danger">{{error.details.messages.password[0]}}</span>
+    <input type="password" [(ngModel)]="user.password" id="password" name="password" class="form-control" required
+      [ngClass]="{'is-invalid': !user.password }">
+  </div>
+  <div class="mb-2">
+    <label for="password_confirm">Confirm password</label>
+    <input type="password" [(ngModel)]="passwordConfirm" id="password_confirm" name="password_confirm" class="form-control" required
+      [ngClass]="{'is-invalid': user.password !== passwordConfirm || !passwordConfirm }">
+  </div>
+  <div class="mb-2">
+    <button class="btn btn-primary" [disabled]="!formIsValid()" (click)="submitRegistration()"><i class="fa fa-user"></i> Register</button>
+  </div>
+</form>
+<div *ngIf="user.token">
+  Logged in as {{ user.username }}.
+</div>

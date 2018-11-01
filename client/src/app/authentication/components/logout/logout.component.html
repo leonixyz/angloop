@@ -1,3 +1,10 @@
-<p>
-  logout works!
-</p>
+<div *ngIf="user">
+  <button (click)="logout()" class="btn btn-primary">
+    <i class="fa fa-sign-out-alt"></i> Logout
+  </button>
+  &nbsp;
+  <span *ngIf="error" class="badge badge-danger">{{ error.message }}</span>
+</div>
+<div *ngIf="!user">
+  No user logged in.
+</div>
