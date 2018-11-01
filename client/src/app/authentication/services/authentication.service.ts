@@ -14,7 +14,9 @@ export class AuthenticationService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    this.getFromPersistency();
+  }
 
   public submitRegistration(user: User) {
     return this.http.post(`${env.API}/Users`, user);
@@ -76,4 +78,9 @@ export class AuthenticationService {
 
     return this.user;
   }
+
+  public isLoggedIn() {
+    return this.user && this.user.token && this.user.token.length > 0;
+  }
+
 }

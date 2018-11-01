@@ -29,7 +29,7 @@ export class RegistrationComponent implements OnInit {
   submitRegistration() {
     this.authn.submitRegistration(this.user)
       .subscribe(
-        _ => this.router.navigate(['authn', 'login']),
+        _ => this.router.navigate(['login']),
         err => this.error = err.error.error
       );
   }

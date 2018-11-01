@@ -26,7 +26,7 @@ export class LogoutComponent implements OnInit {
   logout() {
     this.authn.logout()
       .subscribe(
-        _ => this.router.navigate(['authn', 'login']),
+        _ => this.router.navigate(['login']),
         err => this.error = err.error.error
       );
   }
