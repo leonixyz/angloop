@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+import { OnInit } from '@angular/core';
+import { Output } from '@angular/core';
 import { User } from '../../models/user';
 
 @Component({
@@ -13,10 +14,10 @@ export class LogoutComponent implements OnInit {
 
   public error: any;
   public user: User;
+  @Output() userLoggedOut = new EventEmitter<void>();
 
   constructor(
-    private authn: AuthenticationService,
-    private router: Router
+    private authn: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -26,7 +27,7 @@ export class LogoutComponent implements OnInit {
   logout() {
     this.authn.logout()
       .subscribe(
-        _ => this.router.navigate(['login']),
+        _ => this.userLoggedOut.emit(),
         err => this.error = err.error.error
       );
   }

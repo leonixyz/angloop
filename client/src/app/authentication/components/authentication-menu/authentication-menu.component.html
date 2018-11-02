@@ -1,0 +1,48 @@
+<div id="accordion">
+
+    <div class="card" *ngIf="!isLoggedIn">
+      <div class="card-header" id="headingLogin">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#loginCollapse" aria-expanded="true" aria-controls="loginCollapse">
+            Login
+          </button>
+        </h5>
+      </div>
+      <div id="loginCollapse" class="collapse show" aria-labelledby="headingLogin" data-parent="#accordion">
+        <div class="card-body">
+          <app-login (userLoggedIn)="refresh()"></app-login>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" *ngIf="!isLoggedIn">
+      <div class="card-header" id="headingRegister">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#registerCollapse" aria-expanded="false" aria-controls="registerCollapse">
+            Register
+          </button>
+        </h5>
+      </div>
+      <div id="registerCollapse" class="collapse" aria-labelledby="headingRegister" data-parent="#accordion">
+        <div class="card-body">
+          <app-registration (userRegistered)="refresh()"></app-registration>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" *ngIf="isLoggedIn">
+      <div class="card-header" id="headingLogout">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#logoutCollapse" aria-expanded="false" aria-controls="logoutCollapse">
+            Logout
+          </button>
+        </h5>
+      </div>
+      <div id="logoutCollapse" class="collapse" aria-labelledby="headingLogout" data-parent="#accordion">
+        <div class="card-body">
+          <app-logout (userLoggedOut)="refresh()"></app-logout>
+        </div>
+      </div>
+    </div>
+    
+  </div>

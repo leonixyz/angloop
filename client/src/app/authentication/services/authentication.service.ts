@@ -32,6 +32,7 @@ export class AuthenticationService {
           user.expiration = expiration;
           user.password = null;
 
+          this.user = user;
           this.writePersistent(user);
 
           return user;
@@ -49,6 +50,7 @@ export class AuthenticationService {
     return this.http.post(`${env.API}/Users/logout?access_token=${this.user.token}`, null)
       .pipe(
         map(resp => {
+          this.user = null;
           this.clearPersistent();
           return resp;
         })
@@ -80,7 +82,11 @@ export class AuthenticationService {
   }
 
   public isLoggedIn() {
-    return this.user && this.user.token && this.user.token.length > 0;
+    if(!this.user || !this.user.token) {
+      return false;
+    } else {
+      return this.user.token.length > 0;
+    }
   }
 
 }

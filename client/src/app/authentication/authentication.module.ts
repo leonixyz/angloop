@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationGuard } from './guards/authentication.guard';
+import { AuthenticationMenuComponent } from './components/authentication-menu/authentication-menu.component';
 
 @NgModule({
   imports: [
@@ -14,10 +15,17 @@ import { AuthenticationGuard } from './guards/authentication.guard';
     FormsModule,
     HttpClientModule
   ],
-  declarations: [
+  exports: [
+    AuthenticationMenuComponent,
     LoginComponent,
     LogoutComponent,
     RegistrationComponent
+  ],
+  declarations: [
+    LoginComponent,
+    LogoutComponent,
+    RegistrationComponent,
+    AuthenticationMenuComponent
   ],
   providers: [
     HttpClient,

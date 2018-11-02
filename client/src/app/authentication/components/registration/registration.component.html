@@ -1,8 +1,8 @@
 <form *ngIf="!user.token">
   <div class="mb-2">
-    <label for="username">Username</label>&nbsp;&nbsp;
+    <label for="_username">Username</label>&nbsp;&nbsp;
     <span *ngIf="error && error.details.messages.username" class="badge badge-danger">{{error.details.messages.username[0]}}</span>
-    <input type="text" [(ngModel)]="user.username" id="username" name="username" class="form-control" required
+    <input type="text" [(ngModel)]="user.username" id="_username" name="_username" class="form-control" required
       [ngClass]="{'is-invalid': !user.username }">
   </div>
   <div class="mb-2">
@@ -17,9 +17,9 @@
       [ngClass]="{'is-invalid': user.email !== emailConfirm || !isValidEmail(emailConfirm) }">
   </div>
   <div class="mb-2">
-    <label for="password">Password</label>&nbsp;&nbsp;
+    <label for="_password">Password</label>&nbsp;&nbsp;
     <span *ngIf="error && error.details.messages.password" class="badge badge-danger">{{error.details.messages.password[0]}}</span>
-    <input type="password" [(ngModel)]="user.password" id="password" name="password" class="form-control" required
+    <input type="password" [(ngModel)]="user.password" id="_password" name="_password" class="form-control" required
       [ngClass]="{'is-invalid': !user.password }">
   </div>
   <div class="mb-2">

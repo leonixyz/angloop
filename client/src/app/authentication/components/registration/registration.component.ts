@@ -1,8 +1,9 @@
 import * as EmailValidator from 'email-validator';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Component } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Output } from '@angular/core';
 import { User } from '../../models/user';
 
 @Component({
@@ -16,10 +17,10 @@ export class RegistrationComponent implements OnInit {
   public emailConfirm: string;
   public passwordConfirm: string;
   public error: any;
+  @Output() userRegistered = new EventEmitter<void>();
 
   constructor(
-    private authn: AuthenticationService,
-    private router: Router
+    private authn: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -29,7 +30,7 @@ export class RegistrationComponent implements OnInit {
   submitRegistration() {
     this.authn.submitRegistration(this.user)
       .subscribe(
-        _ => this.router.navigate(['login']),
+        _ => this.userRegistered.emit(),
         err => this.error = err.error.error
       );
   }

@@ -1,5 +1,7 @@
-<ul>
-  <li *ngIf="!isLoggedIn"><a routerLink="login">Login</a></li>
-  <li *ngIf="isLoggedIn"><a routerLink="logout">Logout</a></li>
-  <li *ngIf="!isLoggedIn"><a routerLink="register">Register</a></li>
-</ul>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <app-authentication-menu></app-authentication-menu>
+    </div>
+  </div>
+</div>

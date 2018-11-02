@@ -1,4 +1,3 @@
-import { AuthenticationService } from '../authentication/services/authentication.service';
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 
@@ -9,15 +8,10 @@ import { OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  public isLoggedIn: boolean;
-
-  constructor(
-    private authn: AuthenticationService
-  ) { }
+  constructor() {
+  }
 
   ngOnInit() {
-    this.authn.getFromPersistency();
-    this.isLoggedIn = this.authn.isLoggedIn();
   }
 
 }
