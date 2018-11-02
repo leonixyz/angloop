@@ -47,14 +47,11 @@ export class AuthenticationService {
       return s.asObservable();
     }
 
-    return this.http.post(`${env.API}/Users/logout?access_token=${this.user.token}`, null)
-      .pipe(
-        map(resp => {
-          this.user = null;
-          this.clearPersistent();
-          return resp;
-        })
-      );
+    const token = this.user.token;
+    this.user = null;
+    this.clearPersistent();
+
+    return this.http.post(`${env.API}/Users/logout?access_token=${token}`, null);
   }
 
   public writePersistent(user: User) {

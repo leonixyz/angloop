@@ -18,6 +18,7 @@ export class RegistrationComponent implements OnInit {
   public passwordConfirm: string;
   public error: any;
   @Output() userRegistered = new EventEmitter<void>();
+  public registrationSucceeded: boolean;
 
   constructor(
     private authn: AuthenticationService
@@ -30,8 +31,15 @@ export class RegistrationComponent implements OnInit {
   submitRegistration() {
     this.authn.submitRegistration(this.user)
       .subscribe(
-        _ => this.userRegistered.emit(),
-        err => this.error = err.error.error
+        _ => {
+          this.error = null;
+          this.registrationSucceeded = true;
+          this.userRegistered.emit();
+        },
+        err => {
+          this.registrationSucceeded = false;
+          this.error = err.error.error;
+        }
       );
   }
 
