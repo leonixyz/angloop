@@ -28,7 +28,7 @@
       [ngClass]="{'is-invalid': user.password !== passwordConfirm || !passwordConfirm }">
   </div>
   <div class="mb-2">
-    <button class="btn btn-primary" [disabled]="!formIsValid()" (click)="submitRegistration()"><i class="fa fa-user"></i> Register</button>
+    <button class="btn btn-primary" [disabled]="!formIsValid()"><i class="fa fa-user"></i> Register</button>
     &nbsp;
     <span class="badge badge-success" *ngIf="registrationSucceeded">Registration succeeded.</span>
   </div>
