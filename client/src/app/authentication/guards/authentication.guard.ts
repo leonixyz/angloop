@@ -21,4 +21,14 @@ export class AuthenticationGuard implements CanActivate {
 
     return user && user.token && user.token.length > 0;
   }
+
+  canActivateChild(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean {
+    const user = this.authn.getFromPersistency();
+
+    return user && user.token && user.token.length > 0;
+  }
+
 }
