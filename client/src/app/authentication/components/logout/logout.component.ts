@@ -28,7 +28,11 @@ export class LogoutComponent implements OnInit {
     this.authn.logout()
       .subscribe(
         _ => this.userLoggedOut.emit(),
-        err => this.error = err.error.error
+        err => {
+          this.error = err.error.error;
+          this.authn.clearPersistent();
+          window.location.reload();
+        }
       );
   }
 

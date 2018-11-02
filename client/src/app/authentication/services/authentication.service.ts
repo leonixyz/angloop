@@ -32,7 +32,6 @@ export class AuthenticationService {
           user.expiration = expiration;
           user.password = null;
 
-          this.user = user;
           this.writePersistent(user);
 
           return user;
@@ -49,18 +48,17 @@ export class AuthenticationService {
 
     return this.http.post(`${env.API}/Users/logout`, null)
       .pipe(
-        map(resp => {
-          this.user = null;
-          this.clearPersistent();      
-        })
+        map(resp => this.clearPersistent())
       );
   }
 
   public writePersistent(user: User) {
+    this.user = user;
     window.localStorage.setItem('user', JSON.stringify(user));
   }
 
   public clearPersistent() {
+    this.user = null;
     window.localStorage.removeItem('user');
   }
 
@@ -73,7 +71,6 @@ export class AuthenticationService {
 
       if (new Date().getTime() > this.user.expiration.getTime()) {
         this.clearPersistent();
-        this.user = null;
       }
     }
 
