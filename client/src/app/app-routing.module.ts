@@ -1,11 +1,9 @@
+import { AuthenticationGuard } from './authentication/guards/authentication.guard';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { RouterModule } from '@angular/router';
 import { Routes } from '@angular/router';
-import { LoginComponent } from './authentication/components/login/login.component';
-import { LogoutComponent } from './authentication/components/logout/logout.component';
-import { RegistrationComponent } from './authentication/components/registration/registration.component';
-import { AuthenticationGuard } from './authentication/guards/authentication.guard';
 
 const routes: Routes = [
   {
@@ -13,16 +11,8 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'logout',
-    component: LogoutComponent
-  },
-  {
-    path: 'register',
-    component: RegistrationComponent
+    path: 'profile',
+    component: ProfilePageComponent
   }
 ];
 
