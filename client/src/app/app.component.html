@@ -1,1 +1,26 @@
-<router-outlet></router-outlet>
+<header class="navbar navbar-dark navbar-expand-md bg-dark fixed-top">
+  <div class="container">
+
+    <a routerLink="/" class="navbar-brand">{{ appName }}</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarLinks"
+      aria-controls="navbarLinks" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fa fa-bars"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarLinks">
+      <nav class="navbar-nav">
+        <a routerLink="/" class="nav-item nav-link">One</a>
+        <a routerLink="/" class="nav-item nav-link">Two</a>
+        <a routerLink="/" class="nav-item nav-link">Three</a>
+        <a routerLink="/" class="nav-item nav-link">Four</a>
+        <a routerLink="/" class="nav-item nav-link">Profile</a>
+      </nav>
+    </div>
+
+  </div>
+</header>
+
+<main class="pt-5 mt-5">
+  <router-outlet></router-outlet>
+</main>

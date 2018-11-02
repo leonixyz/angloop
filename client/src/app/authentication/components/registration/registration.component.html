@@ -1,33 +1,33 @@
 <form *ngIf="!user.token" (ngSubmit)="submitRegistration()">
-  <div class="mb-2">
+  <div class="form-group">
     <label for="_username">Username</label>&nbsp;&nbsp;
     <span *ngIf="error && error.details.messages.username" class="badge badge-danger">{{error.details.messages.username[0]}}</span>
     <input type="text" [(ngModel)]="user.username" id="_username" name="_username" class="form-control" required
-      [ngClass]="{'is-invalid': !user.username }">
+      placeholder="Username" [ngClass]="{'is-invalid': !user.username }">
   </div>
-  <div class="mb-2">
+  <div class="form-group">
     <label for="email">Email</label>&nbsp;&nbsp;
     <span *ngIf="error && error.details.messages.email" class="badge badge-danger">{{error.details.messages.email[0]}}</span>
     <input type="email" [(ngModel)]="user.email" id="email" name="email" class="form-control" required
-      [ngClass]="{'is-invalid': !isValidEmail(user.email)}">
+      placeholder="Email address" [ngClass]="{'is-invalid': !isValidEmail(user.email)}">
   </div>
-  <div class="mb-2">
+  <div class="form-group">
     <label for="email_confirm">Confirm email</label>
     <input type="email" [(ngModel)]="emailConfirm" id="email_confirm" name="email_confirm" class="form-control" required
-      [ngClass]="{'is-invalid': user.email !== emailConfirm || !isValidEmail(emailConfirm) }">
+      placeholder="Confirm email address" [ngClass]="{'is-invalid': user.email !== emailConfirm || !isValidEmail(emailConfirm) }">
   </div>
-  <div class="mb-2">
+  <div class="form-group">
     <label for="_password">Password</label>&nbsp;&nbsp;
     <span *ngIf="error && error.details.messages.password" class="badge badge-danger">{{error.details.messages.password[0]}}</span>
     <input type="password" [(ngModel)]="user.password" id="_password" name="_password" class="form-control" required
-      [ngClass]="{'is-invalid': !user.password }">
+      placeholder="Password" [ngClass]="{'is-invalid': !user.password }">
   </div>
-  <div class="mb-2">
+  <div class="form-group">
     <label for="password_confirm">Confirm password</label>
     <input type="password" [(ngModel)]="passwordConfirm" id="password_confirm" name="password_confirm" class="form-control" required
-      [ngClass]="{'is-invalid': user.password !== passwordConfirm || !passwordConfirm }">
+      placeholder="Confirm password" [ngClass]="{'is-invalid': user.password !== passwordConfirm || !passwordConfirm }">
   </div>
-  <div class="mb-2">
+  <div class="form-group">
     <button class="btn btn-primary" [disabled]="!formIsValid()"><i class="fa fa-user"></i> Register</button>
     &nbsp;
     <span class="badge badge-success" *ngIf="registrationSucceeded">Registration succeeded.</span>

@@ -1,4 +1,7 @@
 <div *ngIf="user">
+  <p>
+    You are logged in as {{ user.username }}
+  </p>
   <button (click)="logout()" class="btn btn-primary">
     <i class="fa fa-sign-out-alt"></i> Logout
   </button>
