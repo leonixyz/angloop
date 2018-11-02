@@ -1,4 +1,4 @@
-<form *ngIf="!user.token">
+<form *ngIf="!user.token" (ngSubmit)="submitRegistration()">
   <div class="mb-2">
     <label for="_username">Username</label>&nbsp;&nbsp;
     <span *ngIf="error && error.details.messages.username" class="badge badge-danger">{{error.details.messages.username[0]}}</span>
