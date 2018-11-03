@@ -25,17 +25,30 @@ export class AuthenticationService {
   public login(user: User) {
     return this.http.post(`${env.API}/Users/login`, user)
       .pipe(
-        map((resp : {id: string, ttl: number, created: string}) => {
-          user.token = resp.id;
-          let expiration = new Date(resp.created);
-          expiration = new Date(expiration.getTime() + (resp.ttl * 1000));
-          user.expiration = expiration;
-          user.password = null;
+        map(async (resp: {
+            id: string,
+            ttl: number,
+            created: string,
+            userId: number
+          }) => {
+            // calculate expiration date of the token
+            let expiration = new Date(resp.created);
+            expiration = new Date(expiration.getTime() + (resp.ttl * 1000));
+            user.expiration = expiration;
+            // clear password - we don't want to cache it
+            user.password = null;
+            // save
+            user.token = resp.id;
+            // get additional data
+            const cachedUser = await this.http.get<User>(`${env.API}/Users/${resp.userId}?access_token=${user.token}`).toPromise();
+            user.id = cachedUser.id;
+            user.email = cachedUser.email;
 
-          this.writePersistent(user);
+            this.writePersistent(user);
 
-          return user;
-        })
+            return user;
+          }
+        )
       );
   }
 
