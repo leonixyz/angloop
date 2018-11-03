@@ -52,6 +52,15 @@ export class AuthenticationService {
       );
   }
 
+  public changePassword(oldPassword: string, newPassword: string) {
+    return this.http.post(`${env.API}/Users/change-password`, 
+      {
+        'oldPassword': oldPassword,
+        'newPassword': newPassword
+      }
+    );
+  }
+
   public writePersistent(user: User) {
     this.user = user;
     window.localStorage.setItem('user', JSON.stringify(user));
