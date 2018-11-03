@@ -3,7 +3,23 @@
     <div class="col">
       <h1><i class="fa fa-user"></i> {{ user.username }}</h1>
       <hr>
-      <app-change-password></app-change-password>
+      <h2>Details</h2>
+      <form>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" [(ngModel)]="user.email" placeholder="Email" name="email" id="email" class="form-control">
+        </div>
+        <div class="form-group">
+          <button (click)="updateProfile()" class="btn btn-primary">
+            <i class="fa fa-save"></i> Save
+          </button>
+          &nbsp;
+          <span class="badge badge-success" *ngIf="saved">Saved</span>
+          <span class="badge badge-success" *ngIf="error">{{ error.message }}</span>
+        </div>
+      </form>
+      <hr>
+      <app-change-password></app-change-password>      
     </div>
   </div>
 </div>

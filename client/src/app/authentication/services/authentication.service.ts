@@ -37,12 +37,17 @@ export class AuthenticationService {
             user.expiration = expiration;
             // clear password - we don't want to cache it
             user.password = null;
-            // save
+            // attach token
             user.token = resp.id;
             // get additional data
-            const cachedUser = await this.http.get<User>(`${env.API}/Users/${resp.userId}?access_token=${user.token}`).toPromise();
-            user.id = cachedUser.id;
-            user.email = cachedUser.email;
+            this.http.get<User>(`${env.API}/Users/${resp.userId}?access_token=${user.token}`)
+              .subscribe(
+                cachedUser => {
+                  user.id = cachedUser.id;
+                  user.email = cachedUser.email;
+                  this.writePersistent(user);
+                }
+              )
 
             this.writePersistent(user);
 
@@ -72,6 +77,12 @@ export class AuthenticationService {
         'newPassword': newPassword
       }
     );
+  }
+
+  public updateProfile(user: User) {
+    delete user.expiration;
+    delete user.token;
+    return this.http.patch(`${env.API}/Users/${user.id}`, user);
   }
 
   public writePersistent(user: User) {

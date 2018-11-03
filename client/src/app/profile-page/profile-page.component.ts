@@ -11,6 +11,8 @@ import { AuthenticationService } from '../authentication/services/authentication
 export class ProfilePageComponent implements OnInit {
 
   public user: User;
+  public error: any;
+  public saved: boolean;
 
   constructor(
     private authn: AuthenticationService
@@ -18,6 +20,18 @@ export class ProfilePageComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.authn.getFromPersistency();
+  }
+
+  updateProfile() {
+    this.error = null;
+    this.saved = false;
+    this.authn.writePersistent(this.user);
+
+    this.authn.updateProfile(this.user)
+      .subscribe(
+        _ => this.saved = true,
+        err => this.error = err.error
+      );
   }
 
 }

@@ -15,7 +15,7 @@ export class LoopbackInterceptor implements HttpInterceptor {
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (this.authn.getFromPersistency()) {
+    if (this.authn.getFromPersistency() && this.authn.isLoggedIn()) {
       if (req.url.startsWith(env.API)) {
         const token = this.authn.getFromPersistency().token;
         req = req.clone({
