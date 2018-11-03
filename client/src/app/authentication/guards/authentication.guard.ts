@@ -1,4 +1,4 @@
-import { ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { CanActivate } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { RouterStateSnapshot } from '@angular/router';
@@ -10,7 +10,8 @@ import { AuthenticationService } from '../services/authentication.service';
 export class AuthenticationGuard implements CanActivate {
 
   constructor (
-    private authn: AuthenticationService
+    private authn: AuthenticationService,
+    private router: Router
   ) {}
 
   canActivate(
@@ -19,7 +20,13 @@ export class AuthenticationGuard implements CanActivate {
   ): boolean {
     const user = this.authn.getFromPersistency();
 
-    return user && user.token && user.token.length > 0;
+    const isAuthenticated = (user && user.token && user.token.length > 0);
+
+    if (!isAuthenticated) {
+      this.router.navigate(['login']);
+    }
+
+    return isAuthenticated;
   }
 
   canActivateChild(
@@ -28,7 +35,13 @@ export class AuthenticationGuard implements CanActivate {
   ): boolean {
     const user = this.authn.getFromPersistency();
 
-    return user && user.token && user.token.length > 0;
+    const isAuthenticated = (user && user.token && user.token.length > 0);
+
+    if (!isAuthenticated) {
+      this.router.navigate(['login']);
+    }
+
+    return isAuthenticated;
   }
 
 }

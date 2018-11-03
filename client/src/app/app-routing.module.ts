@@ -1,4 +1,5 @@
 import { AuthenticationGuard } from './authentication/guards/authentication.guard';
+import { AuthenticationMenuComponent } from './authentication/components/authentication-menu/authentication-menu.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
@@ -11,8 +12,13 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: 'login',
+    component: AuthenticationMenuComponent
+  },
+  {
     path: 'profile',
-    component: ProfilePageComponent
+    component: ProfilePageComponent,
+    canActivate: [AuthenticationGuard]
   }
 ];
 
