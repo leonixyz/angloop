@@ -10,11 +10,9 @@
 
     <div class="collapse navbar-collapse" id="navbarLinks">
       <nav class="navbar-nav">
-        <a routerLink="/" class="nav-item nav-link">One</a>
-        <a routerLink="/" class="nav-item nav-link">Two</a>
-        <a routerLink="/" class="nav-item nav-link">Three</a>
-        <a routerLink="/" class="nav-item nav-link">Four</a>
-        <a routerLink="/profile" class="nav-item nav-link">Profile</a>
+        <a routerLink="/login" *ngIf="!isLoggedIn()" class="nav-item nav-link">Login</a>
+        <a routerLink="/profile" *ngIf="isLoggedIn()" class="nav-item nav-link">Profile</a>
+        <a routerLink="/logout" *ngIf="isLoggedIn()" class="nav-item nav-link">Logout</a>
       </nav>
     </div>
 

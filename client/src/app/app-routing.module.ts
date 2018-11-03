@@ -16,6 +16,10 @@ const routes: Routes = [
     component: AuthenticationMenuComponent
   },
   {
+    path: 'logout',
+    component: AuthenticationMenuComponent
+  },
+  {
     path: 'profile',
     component: ProfilePageComponent,
     canActivate: [AuthenticationGuard]
